@@ -1,4 +1,4 @@
-package com.alexandergorin.photobrowser
+package com.alexandergorin.data
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

@@ -8,3 +8,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "PhotoBrowser"
 include ':app'
+include ':domain'
+include ':data'

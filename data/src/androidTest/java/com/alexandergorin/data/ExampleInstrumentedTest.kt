@@ -1,4 +1,4 @@
-package com.alexandergorin.photobrowser
+package com.alexandergorin.data
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -17,6 +17,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.alexandergorin.photobrowser", appContext.packageName)
+        assertEquals("com.alexandergorin.data.test", appContext.packageName)
     }
 }

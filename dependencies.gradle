@@ -1,0 +1,67 @@
+ext {
+    kotlinVersion = "1.5.30"
+    kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+
+    def coreKtxVersion = "1.3.2"
+    def fragmentKtxVersion = "1.2.5"
+    def appCompatVersion = "1.2.0"
+    def lifecycleExtVersion = "2.2.0"
+    def materialVersion = "1.2.1"
+    def constraintLayoutVersion = "2.0.4"
+    def legacySupportVersion = "1.0.0"
+    def recyclerViewVersion = "1.1.0"
+    androidxCore = [
+            coreKtx         : "androidx.core:core-ktx:$coreKtxVersion",
+            fragmentKtx     : "androidx.fragment:fragment-ktx:$fragmentKtxVersion",
+            appCompat       : "androidx.appcompat:appcompat:$appCompatVersion",
+            lifecycleExt    : "androidx.lifecycle:lifecycle-extensions:$lifecycleExtVersion",
+            lifeCycleCommon : "androidx.lifecycle:lifecycle-common-java8:$lifecycleExtVersion",
+            material        : "com.google.android.material:material:$materialVersion",
+            constraintLayout: "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+            legacySupport   : "androidx.legacy:legacy-support-v4:$legacySupportVersion",
+            recyclerview    : "androidx.recyclerview:recyclerview:$recyclerViewVersion"
+    ]
+
+    def junitVersion = "4.13.1"
+    def junitExt = "1.1.2"
+    def espressoCoreVersion = "3.3.0"
+    def archCoreVersion = "2.1.0"
+    def mockkVersion = "1.10.0"
+    testsCore = [
+            junit       : "junit:junit:$junitVersion",
+            junitExt    : "androidx.test.ext:junit:$junitExt",
+            espressoCore: "androidx.test.espresso:espresso-core:$espressoCoreVersion",
+            archCore    : "androidx.arch.core:core-testing:$archCoreVersion",
+            mockk       : "io.mockk:mockk:$mockkVersion"
+    ]
+
+    def rxJavaVersion = "2.2.19"
+    def rxAndroidVersion = "2.1.1"
+    def rxKotlinVersion = "2.4.0"
+    rxJavaLibs = [
+            rxJava   : "io.reactivex.rxjava2:rxjava:$rxJavaVersion",
+            rxAndroid: "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion",
+            rxKotlin : "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
+    ]
+
+    def daggerVersion = "2.38.1"
+    daggerLibs = [
+            dagger        : "com.google.dagger:dagger:$daggerVersion",
+            daggerCompiler: "com.google.dagger:dagger-compiler:$daggerVersion"
+    ]
+
+    def retrofitVersion = "2.9.0"
+    def okHttpLoggingVersion = "4.9.0"
+    retrofitLibs = [
+            retrofit             : "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            retrofitRxJavaAdapter: "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion",
+            okHttpLogging        : "com.squareup.okhttp3:logging-interceptor:$okHttpLoggingVersion",
+            retrofitGson         : "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    ]
+
+    def glideVersion = "4.12.0"
+    glideLibs = [
+            glide        : "com.github.bumptech.glide:glide:$glideVersion",
+            glideCompiler: "com.github.bumptech.glide:compiler:$glideVersion"
+    ]
+}
