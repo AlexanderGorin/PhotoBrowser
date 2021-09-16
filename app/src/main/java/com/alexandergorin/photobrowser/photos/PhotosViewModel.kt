@@ -1,24 +1,23 @@
 package com.alexandergorin.photobrowser.photos
 
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.alexandergorin.data.repo.PhotosRepository
+import com.alexandergorin.domain.PhotoDomainModel
+import com.alexandergorin.domain.Repository
 import com.alexandergorin.photobrowser.utils.SingleLiveEvent
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.plusAssign
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 import javax.inject.Named
 
 class PhotosViewModel @Inject constructor(
-    private val repository: PhotosRepository,
+    private val repository: Repository,
     @Named("IOScheduler") private val ioScheduler: Scheduler,
     @Named("UIScheduler") private val uiScheduler: Scheduler,
-) : ViewModel(), DefaultLifecycleObserver {
+) : ViewModel() {
 
     private val bag = CompositeDisposable()
 
@@ -30,12 +29,17 @@ class PhotosViewModel @Inject constructor(
         get() = mutablePhotosViewState
     private val mutablePhotosViewState = MutableLiveData<PhotosViewState>()
 
-    override fun onStart(owner: LifecycleOwner) {
-        loadData()
+    private var photos: List<PhotoDomainModel> = emptyList()
+
+    fun loadData() {
+        // need to load photos only if photos were not loaded previously or empty list was loaded
+        if (photos.isEmpty()) {
+            loadPhotos()
+        }
     }
 
-    private fun loadData() {
-        bag += repository.getRecentPhotos()
+    private fun loadPhotos() {
+        repository.getRecentPhotos()
             .toObservable()
             .subscribeOn(ioScheduler)
             .observeOn(uiScheduler)
@@ -44,10 +48,13 @@ class PhotosViewModel @Inject constructor(
             .startWith(PhotosViewState.Loading)
             .subscribeBy { viewState ->
                 mutablePhotosViewState.value = viewState
-                if (viewState is PhotosViewState.Error) {
-                    mutableErrorEvent.value = viewState.throwable.localizedMessage
+                when (viewState) {
+                    is PhotosViewState.Error -> mutableErrorEvent.value = viewState.throwable.localizedMessage
+                    is PhotosViewState.Loaded -> photos = viewState.photos
+                    else -> Unit
                 }
             }
+            .addTo(bag)
     }
 
     override fun onCleared() {

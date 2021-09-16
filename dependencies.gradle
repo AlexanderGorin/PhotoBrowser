@@ -1,6 +1,5 @@
 ext {
     kotlinVersion = "1.5.30"
-    kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
     def coreKtxVersion = "1.3.2"
     def fragmentKtxVersion = "1.2.5"
@@ -11,15 +10,16 @@ ext {
     def legacySupportVersion = "1.0.0"
     def recyclerViewVersion = "1.1.0"
     androidxCore = [
-            coreKtx         : "androidx.core:core-ktx:$coreKtxVersion",
-            fragmentKtx     : "androidx.fragment:fragment-ktx:$fragmentKtxVersion",
-            appCompat       : "androidx.appcompat:appcompat:$appCompatVersion",
-            lifecycleExt    : "androidx.lifecycle:lifecycle-extensions:$lifecycleExtVersion",
-            lifeCycleCommon : "androidx.lifecycle:lifecycle-common-java8:$lifecycleExtVersion",
-            material        : "com.google.android.material:material:$materialVersion",
-            constraintLayout: "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
-            legacySupport   : "androidx.legacy:legacy-support-v4:$legacySupportVersion",
-            recyclerview    : "androidx.recyclerview:recyclerview:$recyclerViewVersion"
+            coreKtx          : "androidx.core:core-ktx:$coreKtxVersion",
+            fragmentKtx      : "androidx.fragment:fragment-ktx:$fragmentKtxVersion",
+            appCompat        : "androidx.appcompat:appcompat:$appCompatVersion",
+            lifecycleExt     : "androidx.lifecycle:lifecycle-extensions:$lifecycleExtVersion",
+            lifeCycleCommon  : "androidx.lifecycle:lifecycle-common-java8:$lifecycleExtVersion",
+            lifeCycleLiveData: "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleExtVersion",
+            material         : "com.google.android.material:material:$materialVersion",
+            constraintLayout : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+            legacySupport    : "androidx.legacy:legacy-support-v4:$legacySupportVersion",
+            recyclerview     : "androidx.recyclerview:recyclerview:$recyclerViewVersion"
     ]
 
     def junitVersion = "4.13.1"

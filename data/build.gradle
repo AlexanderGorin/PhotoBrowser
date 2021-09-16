@@ -40,4 +40,6 @@ dependencies {
     implementation retrofitLibs.values()
     implementation daggerLibs.dagger
     kapt daggerLibs.daggerCompiler
+    testImplementation testsCore.junit
+    testImplementation testsCore.mockk
 }

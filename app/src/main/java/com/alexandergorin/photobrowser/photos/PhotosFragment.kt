@@ -21,36 +21,42 @@ class PhotosFragment : ViewBindingFragment<PhotosFragmentBinding>(PhotosFragment
     override fun onCreate(savedInstanceState: Bundle?) {
         Application.appComponent.inject(this)
         super.onCreate(savedInstanceState)
-        lifecycle.addObserver(viewModel)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.loadData()
+
         binding.viewPager.offscreenPageLimit = 3
 
         with(viewModel) {
-            photosViewState.observe(viewLifecycleOwner) { viewState ->
-                when (viewState) {
-                    is PhotosViewState.Error -> {
-                        binding.progressBar.isVisible = false
-                        binding.viewPager.isVisible = false
-                    }
-                    is PhotosViewState.Loaded -> {
-                        binding.progressBar.isVisible = false
-                        binding.viewPager.isVisible = true
-                        binding.viewPager.adapter = PhotosRecyclerViewAdapter(viewState.photos)
-                    }
-                    PhotosViewState.Loading -> {
-                        binding.progressBar.isVisible = true
-                        binding.viewPager.isVisible = false
-                    }
-                }
-            }
-            errorEvent.observe(viewLifecycleOwner) { errorMessage ->
-                Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).show()
-            }
+            photosViewState.observe(viewLifecycleOwner, ::renderState)
+            errorEvent.observe(viewLifecycleOwner, ::renderErrorEvent)
         }
 
+    }
+
+    private fun renderState(viewState: PhotosViewState) {
+        when (viewState) {
+            is PhotosViewState.Error -> {
+                binding.progressBar.isVisible = false
+                binding.viewPager.isVisible = false
+            }
+            is PhotosViewState.Loaded -> {
+                binding.progressBar.isVisible = false
+                binding.viewPager.isVisible = true
+                binding.viewPager.adapter = PhotosRecyclerViewAdapter(viewState.photos)
+            }
+            PhotosViewState.Loading -> {
+                binding.progressBar.isVisible = true
+                binding.viewPager.isVisible = false
+            }
+        }
+    }
+
+    private fun renderErrorEvent(errorMessage: String) {
+        Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).show()
     }
 
     companion object {
